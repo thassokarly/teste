@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5277","Hello World","chromium","Wed Aug 20 17:30:48 BRT 2025","failed","Wed Aug 20 17:30:54 BRT 2025","","example.spec.ts","",""
+"","5398","Hello World","webkit","Wed Aug 20 17:30:48 BRT 2025","failed","Wed Aug 20 17:30:54 BRT 2025","","example.spec.ts","",""
+"","6072","Hello World","firefox","Wed Aug 20 17:30:48 BRT 2025","failed","Wed Aug 20 17:30:54 BRT 2025","","example.spec.ts","",""
