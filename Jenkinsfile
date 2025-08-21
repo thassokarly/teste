@@ -6,15 +6,34 @@ pipeline {
     }
 
     stages {
-        stage('Node.js Deps') {
+        stage('Checkout') {
             steps {
-                sh 'npm install'
+                git branch: 'main', url: 'https://github.com/thassokarly/test'
             }
         }
 
-        stage('E2E Tests') {
+        stage('Build Docker') {
             steps {
-                sh 'npx playwright test'
+                script {
+                    // Build do container que roda Playwright
+                    sh 'docker build -t $DOCKER_IMAGE ./playwright'
+                }
             }
         }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Executa os testes dentro do container
+                    sh 'docker run --rm $DOCKER_IMAGE'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finalizado'
+        }
+    }
 }
