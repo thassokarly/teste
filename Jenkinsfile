@@ -2,38 +2,19 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "playwright-allure"
+        DOCKER_IMAGE = 'playwright-tests'
     }
 
     stages {
-        stage('Clone') {
+        stage('Node.js Deps') {
             steps {
-                git branch: 'main', url: 'https://github.com/thassokarly/teste.git'
+                sh 'npm install'
             }
         }
 
-        stage('Build Docker') {
+        stage('E2E Tests') {
             steps {
-                sh "docker build -t ${IMAGE_NAME} ."
+                sh 'npx playwright test'
             }
         }
-
-        stage('Run Tests') {
-            steps {
-                sh "docker run --rm -v ${WORKSPACE}/allure-results:/app/allure-results -v ${WORKSPACE}/allure-report:/app/allure-report ${IMAGE_NAME}"
-            }
-        }
-
-        stage('Allure Report') {
-            steps {
-                sh "docker run --rm -v ${WORKSPACE}/allure-report:/app/allure-report ${IMAGE_NAME} npm run allure"
-            }
-        }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
-        }
-    }
 }
