@@ -5,7 +5,7 @@ test('Hello World', async ({ page }) => {
   await page.goto('about:blank');
 
   // Insere "Hello World" no body da página via JavaScript
-  await page.setContent('<h1>Helllo World</h1>');
+  await page.setContent('<h1>Hello World</h1>');
 
   // Verifica se o texto está visível
   await expect(page.getByText('Hello World')).toBeVisible();
